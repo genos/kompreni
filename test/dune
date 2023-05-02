@@ -1,0 +1,3 @@
+(tests
+ (names test_semigroup test_monoid)
+ (libraries kompreni alcotest qcheck qcheck-alcotest))
