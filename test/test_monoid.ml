@@ -16,7 +16,7 @@ let () =
   let module Prod = LawTest (Instances.Prod) in
   let module Max = LawTest (Instances.Max) in
   let module Min = LawTest (Instances.Min) in
-  Alcotest.run "Monoid Laws, int examples"
+  Alcotest.run "Monoid Laws Int Examples"
     [
       ("sum", Sum.tests);
       ("prod", Prod.tests);
