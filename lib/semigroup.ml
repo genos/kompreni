@@ -11,14 +11,13 @@ module Utils (S : Signature) = struct
     match n with
     | n when n < 1 -> None
     | 1 -> Some x
-    | _ -> (
-        let n' = n / 2 in
-        let x' = stimes n' (x <+> x) in
-        match n mod 2 with 0 -> x' | _ -> Option.map (( <+> ) x) x')
+    | _ ->
+        let x' = stimes (n / 2) (x <+> x) in
+        if n mod 2 = 0 then x' else Option.map (( <+> ) x) x'
 end
 
 module Laws (S : Signature) = struct
   open S
 
-  let assoc x y z = x <+> (y <+> z) = (x <+> y <+> z)
+  let associative x y z = x <+> (y <+> z) = (x <+> y <+> z)
 end

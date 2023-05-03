@@ -3,41 +3,24 @@ open Kompreni
 module LawTest (S : Semigroup.Signature with type t = int) = struct
   include Semigroup.Laws (S)
 
-  let tests name =
+  let tests =
     [
       QCheck_alcotest.to_alcotest
-        (QCheck.Test.make ~count:1000
-           ~name:(name ^ " " ^ "assoc")
-           (QCheck.triple QCheck.int QCheck.int QCheck.int)
-           (fun (x, y, z) -> assoc x y z));
+        (QCheck.Test.make ~count:1000 ~name:"associative"
+           (QCheck.triple QCheck.int QCheck.int QCheck.int) (fun (x, y, z) ->
+             associative x y z));
     ]
 end
 
 let () =
-  let module Sum = LawTest (struct
-    type t = int
-
-    let ( <+> ) = ( + )
-  end) in
-  let module Prod = LawTest (struct
-    type t = int
-
-    let ( <+> ) = ( * )
-  end) in
-  let module Max = LawTest (struct
-    type t = int
-
-    let ( <+> ) = max
-  end) in
-  let module Min = LawTest (struct
-    type t = int
-
-    let ( <+> ) = min
-  end) in
+  let module Sum = LawTest (Instances.Sum) in
+  let module Prod = LawTest (Instances.Prod) in
+  let module Max = LawTest (Instances.Max) in
+  let module Min = LawTest (Instances.Min) in
   Alcotest.run "Semigroup Laws, int examples"
     [
-      ("sum", Sum.tests "sum");
-      ("prod", Prod.tests "prod");
-      ("max", Max.tests "max");
-      ("min", Min.tests "min");
+      ("sum", Sum.tests);
+      ("prod", Prod.tests);
+      ("max", Max.tests);
+      ("min", Min.tests);
     ]

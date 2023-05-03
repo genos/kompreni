@@ -3,43 +3,23 @@ open Kompreni
 module LawTest (M : Monoid.Signature with type t = int) = struct
   include Monoid.Laws (M)
 
-  let tests name =
+  let tests =
     List.map
-      (fun (n, p) ->
+      (fun (name, prop) ->
         QCheck_alcotest.to_alcotest
-          (QCheck.Test.make ~count:1000 ~name:(name ^ " " ^ n) QCheck.int p))
+          (QCheck.Test.make ~count:1000 ~name QCheck.int prop))
       [ ("left id", left_id); ("right id", right_id) ]
 end
 
 let () =
-  let module Sum = LawTest (struct
-    type t = int
-
-    let ( <+> ) = ( + )
-    let empty = 0
-  end) in
-  let module Prod = LawTest (struct
-    type t = int
-
-    let ( <+> ) = ( * )
-    let empty = 1
-  end) in
-  let module Max = LawTest (struct
-    type t = int
-
-    let ( <+> ) = max
-    let empty = min_int
-  end) in
-  let module Min = LawTest (struct
-    type t = int
-
-    let ( <+> ) = min
-    let empty = max_int
-  end) in
+  let module Sum = LawTest (Instances.Sum) in
+  let module Prod = LawTest (Instances.Prod) in
+  let module Max = LawTest (Instances.Max) in
+  let module Min = LawTest (Instances.Min) in
   Alcotest.run "Monoid Laws, int examples"
     [
-      ("sum", Sum.tests "sum");
-      ("prod", Prod.tests "prod");
-      ("max", Max.tests "max");
-      ("min", Min.tests "min");
+      ("sum", Sum.tests);
+      ("prod", Prod.tests);
+      ("max", Max.tests);
+      ("min", Min.tests);
     ]
