@@ -3,8 +3,7 @@ module type Signature = sig
   include Monoid.Signature
 end
 
-
-module Laws (M: Signature) = struct
-  include Monoid.Laws(M)
-  include Commutative_semigroup.Laws(M)
+module Laws (M : Signature) = struct
+  include Monoid.Laws (M)
+  include Commutative_semigroup.Laws (M)
 end
