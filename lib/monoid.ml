@@ -1,7 +1,7 @@
 module type Signature = sig
   include Semigroup.Signature
 
-  val empty : t
+  val zero : t
 end
 
 module Utils (M : Signature) = struct
@@ -9,13 +9,13 @@ module Utils (M : Signature) = struct
   include Semigroup.Utils (M)
 
   let mtimes (n : int) (x : M.t) : M.t option =
-    match n with n when n < 0 -> None | 0 -> Some empty | _ -> stimes n x
+    match n with n when n < 0 -> None | 0 -> Some zero | _ -> stimes n x
 end
 
 module Laws (M : Signature) = struct
   open M
   include Semigroup.Laws (M)
 
-  let left_id x = empty <+> x = x
-  let right_id x = x <+> empty = x
+  let left_id x = zero +& x = x
+  let right_id x = x +& zero = x
 end
