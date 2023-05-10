@@ -19,5 +19,5 @@ end
 module Laws (S : Signature) = struct
   open S
 
-  let associative x y z = x +& (y +& z) = (x +& y +& z)
+  let associative x y z = x +& (y +& z) = x +& y +& z
 end
