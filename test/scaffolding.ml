@@ -2,10 +2,9 @@ open Kompreni
 
 let uncurry2 f (x, y) = f x y
 let uncurry3 f (x, y, z) = f x y z
-let count = 1000
 
 let make_test gen name prop =
-  QCheck_alcotest.to_alcotest (QCheck2.Test.make ~count ~name gen prop)
+  QCheck_alcotest.to_alcotest (QCheck2.Test.make ~count:1000 ~name gen prop)
 
 module type Testable = sig
   type t
