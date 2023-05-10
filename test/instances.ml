@@ -38,7 +38,8 @@ end
 module MinPlus = struct
   type t = Finite of float | Infinite
 
-  let ( +& ) a b = function
+  let ( +& ) a b =
+    match (a, b) with
     | Finite x, Finite y -> Finite (Float.max x y)
     | Finite _, _ -> a
     | _, Finite _ -> b
@@ -46,9 +47,8 @@ module MinPlus = struct
 
   let zero = Infinite
 
-  let ( *& ) = function
-    | Finite x, Finite y -> Finite (x +. y)
-    | _, _ -> Infinite
+  let ( *& ) a b =
+    match (a, b) with Finite x, Finite y -> Finite (x +. y) | _, _ -> Infinite
 
   let one = Finite 0.0
 end
