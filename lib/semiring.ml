@@ -13,7 +13,7 @@ module Laws (S : Signature) = struct
   open S
   include Commutative_monoid.Laws (S)
 
-  (* ⟨S, *&⟩ is also a Monoid *)
+  (* (S, 1, *&) is also a Monoid *)
   let times_associative x y z = x *& (y *& z) = x *& y *& z
   let times_left_one x = one *& x = x
   let times_right_one x = x *& one = x
