@@ -9,10 +9,11 @@ bug-reports: "https://github.com/genos/kompreni/issues"
 depends: [
   "dune" {>= "3.7"}
   "ocaml" {>= "5.0.0"}
-  "odoc" {with-doc & >= "2.2.0"}
   "alcotest" {with-test & >= "1.7.0"}
   "qcheck" {with-test & >= "0.20"}
   "qcheck-alcotest" {with-test & >= "0.20"}
+  "zarith" {with-test & >= "1.12"}
+  "odoc" {with-doc}
 ]
 build: [
   ["dune" "subst"] {dev}
