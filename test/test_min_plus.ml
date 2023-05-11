@@ -19,11 +19,16 @@ module MinPlus = struct
 
   let one = Finite Q.zero
 
+  let mp (n, d) =
+    match d with
+    | 0 -> Infinite
+    | d -> Finite (Q.make (Z.of_int n) (Z.of_int d))
+
   let gen =
     QCheck2.Gen.frequency
       [
         (1, QCheck2.Gen.pure Infinite);
-        (1, QCheck2.Gen.map (fun x -> Finite (Q.of_float x)) QCheck2.Gen.float);
+        (1, QCheck2.Gen.map mp QCheck2.Gen.(pair int int));
       ]
 end
 
