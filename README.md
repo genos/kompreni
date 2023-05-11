@@ -1,5 +1,5 @@
 # kompreni
-OCaml abstract algebra
+Understanding OCaml with abstract algebra examples
 
 
 

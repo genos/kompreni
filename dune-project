@@ -9,7 +9,7 @@
 
 (package
  (name kompreni)
- (synopsis "OCaml abstract algebra")
+ (synopsis "Understanding OCaml with abstract algebra examples")
  (depends
    (ocaml (>= 5.0.0))
    (alcotest (and :with-test (>= 1.7.0)))
