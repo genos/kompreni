@@ -49,7 +49,7 @@ let () =
   let module Max = CommutativeMonoidLaws (Gen) (Max) in
   let module Min = CommutativeMonoidLaws (Gen) (Min) in
   let module Integers = SemiringLaws (Gen) (Integers) in
-  Alcotest.run "Variious Int Law Examples"
+  Alcotest.run "Various Int Law Examples"
     [
       ("Sum", Sum.tests);
       ("Prod", Prod.tests);
