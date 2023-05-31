@@ -1,4 +1,4 @@
-(lang dune 3.7)
+(lang dune 3.8)
 
 (name kompreni)
 (source (github genos/kompreni))
@@ -13,6 +13,6 @@
  (depends
    (ocaml (>= 5.0.0))
    (alcotest (and :with-test (>= 1.7.0)))
-   (qcheck (and :with-test (>= 0.20)))
-   (qcheck-alcotest (and :with-test (>= 0.20)))
+   (qcheck (and :with-test (>= 0.21.1)))
+   (qcheck-alcotest (and :with-test (>= 0.21.1)))
    (zarith (and :with-test (>= 1.12)))))
