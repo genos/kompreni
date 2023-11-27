@@ -9,37 +9,37 @@ end
 module Sum = struct
   type t = int
 
-  let ( +& ) = ( + )
+  let ( +: ) = ( + )
   let zero = 0
 end
 
 module Prod = struct
   type t = int
 
-  let ( +& ) = ( * )
+  let ( +: ) = ( * )
   let zero = 1
 end
 
 module Max = struct
   type t = int
 
-  let ( +& ) = max
+  let ( +: ) = max
   let zero = min_int
 end
 
 module Min = struct
   type t = int
 
-  let ( +& ) = min
+  let ( +: ) = min
   let zero = max_int
 end
 
 module Integers = struct
   type t = int
 
-  let ( +& ) = ( + )
+  let ( +: ) = ( + )
   let zero = 0
-  let ( *& ) = ( * )
+  let ( *: ) = ( * )
   let one = 1
 end
 

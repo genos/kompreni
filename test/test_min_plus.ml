@@ -3,7 +3,7 @@ open Scaffolding
 module MinPlus = struct
   type t = Finite of Q.t | Infinite
 
-  let ( +& ) a b =
+  let ( +: ) a b =
     match (a, b) with
     | Finite x, Finite y -> Finite (Q.max x y)
     | Finite _, _ -> a
@@ -12,7 +12,7 @@ module MinPlus = struct
 
   let zero = Infinite
 
-  let ( *& ) a b =
+  let ( *: ) a b =
     match (a, b) with
     | Finite x, Finite y -> Finite (Q.add x y)
     | _, _ -> Infinite

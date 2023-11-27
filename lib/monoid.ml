@@ -16,6 +16,6 @@ module Laws (M : Signature) = struct
   open M
   include Semigroup.Laws (M)
 
-  let left_id x = zero +& x = x
-  let right_id x = x +& zero = x
+  let left_id x = zero +: x = x
+  let right_id x = x +: zero = x
 end
