@@ -1,9 +1,10 @@
 open Scaffolding
+open Popper
 
 module Gen = struct
-  type t = int
+  type t = int [@@deriving show]
 
-  let gen = QCheck2.Gen.int
+  let gen = Sample.int
 end
 
 module Sum = struct
@@ -49,11 +50,12 @@ let () =
   let module Max = CommutativeMonoidLaws (Gen) (Max) in
   let module Min = CommutativeMonoidLaws (Gen) (Min) in
   let module Integers = SemiringLaws (Gen) (Integers) in
-  Alcotest.run "Various Int Law Examples"
-    [
-      ("Sum", Sum.tests);
-      ("Prod", Prod.tests);
-      ("Max", Max.tests);
-      ("Min", Min.tests);
-      ("Integers", Integers.tests);
-    ]
+  run
+  @@ suite
+       [
+         ("sum", Sum.tests);
+         ("prod", Prod.tests);
+         ("max", Max.tests);
+         ("min", Min.tests);
+         ("integers", Integers.tests);
+       ]

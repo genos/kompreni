@@ -1,3 +1,5 @@
 (tests
  (names test_ints test_min_plus)
- (libraries kompreni alcotest qcheck qcheck-alcotest zarith))
+ (libraries kompreni popper zarith)
+ (preprocess
+  (pps ppx_deriving.show ppx_deriving.ord ppx_deriving_popper)))
