@@ -1,0 +1,15 @@
+(version 0.1.1)
+
+(build
+ (progn
+  (when
+   %{pkg-self:dev}
+   (run dune subst))
+  (run dune build -p %{pkg-self:name} -j %{jobs} @install)))
+
+(depends pringo ocaml dune)
+
+(source
+ (fetch
+  (url https://github.com/jobjo/popper/archive/0.1.1.tar.gz)
+  (checksum md5=ec6fab68323d279721178237a6f8f68c)))

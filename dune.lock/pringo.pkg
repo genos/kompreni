@@ -1,0 +1,14 @@
+(version 1.4)
+
+(install
+ (run %{make} install))
+
+(build
+ (run %{make}))
+
+(depends ocaml ocamlfind)
+
+(source
+ (fetch
+  (url https://github.com/xavierleroy/pringo/archive/1.4.tar.gz)
+  (checksum md5=cf57361241b74422d8a1eed675c4e9ba)))
