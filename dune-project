@@ -9,6 +9,7 @@
 (package
  (name kompreni)
  (synopsis "Understanding OCaml with abstract algebra examples")
+ (allow_empty)
  (depends
    (ocaml (and (>= 5.2.0) (< 6)))
    (popper (and :with-test (>= 0.1.1) (< 0.2)))
