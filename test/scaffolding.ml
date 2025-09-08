@@ -4,8 +4,10 @@ open Sample.Syntax
 
 let uncurry2 f (x, y) = f x y
 let uncurry3 f (x, y, z) = f x y z
-let pp_pair pp out (x, y) = Format.pp_print_list pp out [ x; y ]
-let pp_triple pp out (x, y, z) = Format.pp_print_list pp out [ x; y; z ]
+let pp2 pp_x pp_y out (x, y) = Format.fprintf out "(%a, %a)" pp_x x pp_y y
+
+let pp3 pp_x pp_y pp_z out (x, y, z) =
+  Format.fprintf out "(%a, %a, %a)" pp_x x pp_y y pp_z z
 
 let make_test gen pp name prop =
   ( name,
@@ -29,7 +31,11 @@ struct
       [
         make_test
           Sample.Tuple.(tripple X.gen X.gen X.gen)
-          (pp_triple X.pp) "associative" (uncurry3 associative);
+          (pp3 X.pp X.pp X.pp) "associative" (uncurry3 associative);
+        make_test
+          Sample.Tuple.(pair Sample.int X.gen)
+          (pp2 Format.pp_print_int X.pp)
+          "stimes ok" (uncurry2 stimes_ok);
       ]
 end
 
@@ -45,7 +51,7 @@ struct
       [
         make_test
           Sample.Tuple.(pair X.gen X.gen)
-          (pp_pair X.pp) "commutative" (uncurry2 commutative);
+          (pp2 X.pp X.pp) "commutative" (uncurry2 commutative);
         ("semigroup", SL.tests);
       ]
 end
@@ -94,7 +100,9 @@ struct
         ]
     @ List.map
         (uncurry2
-           (make_test Sample.Tuple.(tripple X.gen X.gen X.gen) (pp_triple X.pp)))
+           (make_test
+              Sample.Tuple.(tripple X.gen X.gen X.gen)
+              (pp3 X.pp X.pp X.pp)))
         [
           ("times associative", uncurry3 times_associative);
           ("left distributive", uncurry3 left_distributive);
